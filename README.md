@@ -1,6 +1,6 @@
-# agendequadra
+# AgendeQuadra
 
-A new Flutter project.
+Projeto em Flutter para atividade prática da matéria: Programação para Dispositivos Móveis - 1º Bimestre
 
 ## Getting Started
 
