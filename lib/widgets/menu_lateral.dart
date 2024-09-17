@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Componente de menu lateral (drawer) para navegação entre telas.
 class MenuDrawer extends StatelessWidget {
-  // Função para verificar se o usuário já está logado
-  Future<bool> _checkLoginStatus() async {
+  /// Verifica se o usuário já está logado.
+  Future<bool> _verificarStatusLogin() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool('isLoggedIn') ?? false;
   }
@@ -14,6 +15,7 @@ class MenuDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
+          /// Cabeçalho do menu lateral.
           DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.orange,
@@ -26,6 +28,7 @@ class MenuDrawer extends StatelessWidget {
               ),
             ),
           ),
+          /// Item de menu que navega para a tela Home.
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Home'),
@@ -33,6 +36,7 @@ class MenuDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed('/home');
             },
           ),
+          /// Item de menu que navega para a tela de Login.
           ListTile(
             leading: Icon(Icons.login),
             title: Text('Login'),
@@ -40,11 +44,12 @@ class MenuDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed('/login');
             },
           ),
+          /// Item de menu que verifica se o usuário está logado e navega para as quadras disponíveis ou login.
           ListTile(
             leading: Icon(Icons.sports_soccer),
             title: Text('Quadras Disponíveis'),
             onTap: () async {
-              bool isLoggedIn = await _checkLoginStatus();
+              bool isLoggedIn = await _verificarStatusLogin();
               if (isLoggedIn) {
                 Navigator.of(context).pushReplacementNamed('/courts');
               } else {
